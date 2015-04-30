@@ -2,7 +2,7 @@
 
 def parsetml(tftd, mth):
     #loc1 = tftd.find('#66CCFF">') #<body style="margin:0px; font-family:Arial, verdana, sans-serif; font-size:10px; text-align:left" bgcolor="#66CCFF">
-    loc1 = tftd.find('<table')
+    loc1 = tftd.find('<table') #updated to not get email headers from gmail fetches.
     loc2 = tftd.find('</body>')
     #html = tftd[loc1+9:loc2]
     html = tftd[loc1:loc2]
