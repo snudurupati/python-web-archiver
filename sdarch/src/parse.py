@@ -1,11 +1,11 @@
 # parsetml cleans up the tftd html from the email and attaches tftd_template headers and footers.
 
 def parsetml(tftd, mth):
-    loc1 = tftd.find('#66CCFF">') #<body style="margin:0px; font-family:Arial, verdana, sans-serif; font-size:10px; text-align:left" bgcolor="#66CCFF">
-    #loc1 = tftd.find('</head>')
+    #loc1 = tftd.find('#66CCFF">') #<body style="margin:0px; font-family:Arial, verdana, sans-serif; font-size:10px; text-align:left" bgcolor="#66CCFF">
+    loc1 = tftd.find('<table')
     loc2 = tftd.find('</body>')
-    html = tftd[loc1+9:loc2]
-    #html = tftd[loc1+7:loc2]
+    #html = tftd[loc1+9:loc2]
+    html = tftd[loc1:loc2]
     loc3 = html.find('<TABLE ID="aweber_rem"')
     loc4 = html.find('</body>')
     html = html.replace(html[loc3:loc4], '')
@@ -28,7 +28,7 @@ def parsetml(tftd, mth):
     html = html.replace('From the following IP address:', '')
     html = html.replace('96.61.241.6<br />', '')
     html = html.replace('Answers by Citing the Vedic Version:','<a name="W"></a>Answers by Citing the Vedic Version:')
-    hdr  = "<html xmlns='http://www.w3.org/1999/xhtml'><body><div align='center'>  <p class='ct'><a href='../../../index.html'>Back to Home Page</a></p><p class='ct'><a href='index.html'>Back to "+mth+" </a><a href='index.html'> Index</a></p><br /></div>"
+    hdr  = "<html xmlns='http://www.w3.org/1999/xhtml'><body><div align='center'>  <p class='ct'><a href='../../../index.html'>Back to Home Page</a></p><p class='ct'><a href='index.html'>Back to "+mth+" </a><a href='index.html'> Index</a></p><br /></div><div align=\"center\">"
     fotr = "<p align=center><a href='../../../index.html'>Back to Home Page</a></p><p align=center><a href='index.html'>Back to "+mth+" Index</a></p></body></html>"
     html = hdr+html+fotr
     return html

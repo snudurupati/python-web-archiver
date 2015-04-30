@@ -10,7 +10,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 #print int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3])
 dtval = datetime.date(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]))
-#dtval = datetime.date(2014,9,13)
+#dtval = datetime.date(2015,3,4)
 tftd, indxhdr, communhdr = fetch.fetchtml(dtval)
 html = parse.parsetml(tftd, dtval.strftime('%B'))
 urlist, namlist = getfile.geturl(html)
@@ -22,9 +22,9 @@ f=open(fpath,'w')
 f.write(html)
 f.close()
 f=open(fpath,'r')
-upload.upfile(dtval,fname,f)
+'''upload.upfile(dtval,fname,f)
 indxhtml(dtval, indxhdr)
-communhtml(dtval, communhdr)
+communhtml(dtval, communhdr)'''
 f.close()
 
 
