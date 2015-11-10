@@ -9,8 +9,8 @@ import os, sys
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 #print int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3])
-dtval = datetime.date(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]))
-#dtval = datetime.date(2015,3,4)
+#dtval = datetime.date(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]))
+dtval = datetime.date(2015,11,8)
 tftd, indxhdr, communhdr = fetch.fetchtml(dtval)
 html = parse.parsetml(tftd, dtval.strftime('%B'))
 #print html

@@ -22,7 +22,7 @@ def getimg(imgurlist,imgnamlist):
         try:
 	           urllib.urlretrieve(imgurlist[i], imgname)
 	           fob = open(imgname,'rb')
-	           upload.upimg(imgnamlist[i],fob)
+	           upload.upimg(imgnamlist[i].replace('%20', ' '),fob) #replace any %20 with white space.
         except:
 	           #print 'Exception in getimg!'
 	             raise
