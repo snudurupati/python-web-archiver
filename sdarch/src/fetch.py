@@ -29,9 +29,10 @@ def fetchtml(dtval):
 	subj = subj.replace('--and', '')
 	subj = subj.replace('\r', '')
 	subj = subj.replace('\n', '')
+	subj = subj.replace('/', '')
 	subj = subj.split('--')
-	indxhdr = subj[1]
-	communhdr = subj[2]
+	indxhdr = subj[1] 		#indxhdr = subj[1].split('/')[0]#subj[1]
+	communhdr = subj[3] 	#communhdr = subj[1].split('/')[2]#subj[2]
 	return tftd, indxhdr, communhdr
 	m.logout()
 
