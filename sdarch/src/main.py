@@ -10,7 +10,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 #print int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3])
 #dtval = datetime.date(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]))
-dtval = datetime.date(2016,3,14)
+dtval = datetime.date(2016,5,13)
 tftd, indxhdr, communhdr = fetch.fetchtml(dtval)
 html = parse.parsetml(tftd, dtval.strftime('%B'))
 #print html
