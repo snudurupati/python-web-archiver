@@ -5,6 +5,7 @@ import getfile
 from lcreatindx import lindxhtml, lcommunhtml
 import os, sys
 from datetime import date, timedelta
+from urllib import ContentTooShortError
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 yr = int(sys.argv[1])
@@ -37,4 +38,8 @@ def mainfunc(dtval):
     lcommunhtml(dtval, communhdr)
 
 for dt in dd:
-    mainfunc(dt)
+    try:
+        mainfunc(dt)
+    except Exception:
+        print("Skipping: %s" % dt)
+        pass
