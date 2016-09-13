@@ -38,8 +38,9 @@ def mainfunc(dtval):
     lcommunhtml(dtval, communhdr)
 
 for dt in dd:
-    try:
+    mainfunc(dt)
+    '''try:
         mainfunc(dt)
     except Exception:
         print("Skipping: %s" % dt)
-        pass
+        pass'''
