@@ -41,6 +41,6 @@ for dt in dd:
     #mainfunc(dt)
     try:
         mainfunc(dt)
-    except Exception:
-        print("Skipping: %s" % dt)
+    except Exception as e:
+        print("Skipping: %s, error %s" % (dt, e))
         pass
