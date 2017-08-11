@@ -2,14 +2,18 @@
 Created 5/19/2016 to return blank commun header when email subject is missing it.
 '''
 
-#import datetime
+from datetime import timedelta
 from gmail import initgmail
+from itertools import dropwhile, islice
 
 def fetchtml(dtval):
 	m = initgmail()
-	dt = dtval.strftime('%d %B %Y').lstrip('0') #construct date string of fromat '27 November 2012' and remove any leading 0's as on 01 December.
-	#construct a raw search string like '(X-GM-RAW "subject:3 december 2014")'
-	rawStr = '(X-GM-RAW "subject:'+dt+'")' 
+	dt = dtval.strftime('%#d %B %Y').lstrip('0') #construct date string of fromat '27 November 2012' and remove any leading 0's as on 01 December.
+	#construct a raw search string like '(X-GM-RAW "subject: 1 May 2016 after:2016/4/30 before:2016/5/7")'
+	before = (dtval + timedelta(days=2)).strftime('%Y/%#m/%#d')
+	after = (dtval - timedelta(days=1)).strftime('%Y/%#m/%#d')
+	rawStr = '(X-GM-RAW "subject: '+dt+' after:'+after+' before:'+before+'")'
+	#print rawStr
 	resp, msgID = m.search(None, rawStr)
 	'''12/18/2014
 	resp, msgID = m.search(None,'subject', dt)
@@ -22,19 +26,26 @@ def fetchtml(dtval):
 	items = msgID[0].split() #split, in case more than one email found, corrected versions.
 	resp, data = m.fetch(items[len(items)-1], "(RFC822)") #len(items)-1, when more than one email found use the latest, e.g. two emails found fetch items[1]
 	tftd = data[0][1]
-	typ, msg  = m.fetch(items[len(items)-1], '(RFC822.SIZE BODY[HEADER.FIELDS (SUBJECT)])')
-	subj = msg[0][1].strip()
-	subj = subj.replace('--&--','--and--')
-	subj = subj.replace('-&-','--and--')
-	subj = subj.replace('--and', '')
-	subj = subj.replace('\r', '')
-	subj = subj.replace('\n', '')
-	subj = subj.replace('/', '')
-	subj = subj.split('--')
-	indxhdr = subj[1]
-	#communhdr = subj[3]
-	communhdr = ''
-	return tftd, indxhdr, communhdr
+	'''
+	f=open('tftd/tftd_raw','w')
+	f.write(tftd)
+	f.close()
+	'''
+	indxhdr = dt
+	communhdr = dt
+	
+	lines = iter(tftd.split('\n'))
+	for line in lines:
+		if "Today's Thought--" in line:
+			indxhdr = line.split('--')[1].strip()
+		elif "Today's Thought:" in line:
+			indxhdr = line.split(':')[1].strip()
+		elif "Answers by Citing the Vedic Version:" in line:
+			communhdr = [line for line in lines if ':' in line][0].split(':')[1].strip()
+					
+	#print indxhdr, communhdr
 	m.logout()
+	return tftd, indxhdr, communhdr
+	
 
 

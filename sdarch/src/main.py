@@ -1,4 +1,4 @@
-import fetch
+import fetchNoIdx
 import datetime
 import parse
 import getfile
@@ -11,7 +11,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 #print int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3])
 #dtval = datetime.date(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]))
 dtval = datetime.date(2016,5,13)
-tftd, indxhdr, communhdr = fetch.fetchtml(dtval)
+tftd, indxhdr, communhdr = fetchNoIdx.fetchtml(dtval)
 html = parse.parsetml(tftd, dtval.strftime('%B'))
 #print html
 urlist, namlist = getfile.geturl(html)

@@ -24,7 +24,8 @@ def getimg(imgurlist,imgnamlist):
             fob = open(imgname,'rb')
             upload.upimg(imgnamlist[i].replace('%20', ' '),fob) #replace any %20 with white space.
             fob.close()
-        except Exception:
+        except Exception as e:
+            print(e)
             pass
 
 
