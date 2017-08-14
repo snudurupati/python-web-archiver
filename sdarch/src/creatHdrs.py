@@ -20,25 +20,24 @@ dd = [begin + timedelta(days=x) for x in range((end - begin).days + 1)]
 def mainfunc(dtval):
     #print dtval
     tftd, indxhdr, communhdr = fetchNoIdx.fetchtml(dtval)
-    '''html = parse.parsetml(tftd, dtval.strftime('%B'))
-    urlist, namlist = getfile.geturl(html)
-    getfile.getimg(urlist,namlist)
-    html = parse.replimgsrc(html)
-    fpath = dtval.strftime('tftd/tftd_%m%d%y.html')
-    #fname = dtval.strftime('tftd_%m%d%y.html')
-    f=open(fpath,'w')
-    f.write(html)
-    f.close()
-    f=open(fpath,'r')
-    #upload.upfile(dtval,fname,f)
-    f.close()'''
     lindxhtml(dtval, indxhdr)
     lcommunhtml(dtval, communhdr)
 
+err_list = []
 for dt in dd:
     #mainfunc(dt)
     try:
         mainfunc(dt)
     except Exception as e:
-        print("Skipping: %s, error %s" % (dt, e))
+        err = "Skipping: %s, error %s" % (dt, e)
+        print(err)
+        err_list.append(err)
         pass
+
+# write missing dates to log file, log created only if list is non-empty
+if err_list:
+    fpath = 'logs/CreateHeader_'+str(mnth)+str(yr)+'.log'
+    f = open(fpath, 'w')
+    err_str = '\n'.join(err_list)
+    f.write(err_str)
+    f.close()

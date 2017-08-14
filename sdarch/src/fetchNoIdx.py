@@ -33,7 +33,7 @@ def fetchtml(dtval):
 	'''
 	indxhdr = dt
 	communhdr = dt
-	
+
 	lines = iter(tftd.split('\n'))
 	for line in lines:
 		if "Today's Thought--" in line:
