@@ -5,7 +5,6 @@ import getfile
 from lcreatindx import lindxhtml, lcommunhtml
 import os, sys
 from datetime import date, timedelta
-from urllib import ContentTooShortError
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 yr = int(sys.argv[1])
@@ -37,10 +36,21 @@ def mainfunc(dtval):
     lindxhtml(dtval, indxhdr)
     lcommunhtml(dtval, communhdr)
 
+err_list = []
 for dt in dd:
     #mainfunc(dt)
     try:
         mainfunc(dt)
     except Exception as e:
-        print("Skipping: %s, error %s" % (dt, e))
+        err = "Skipping: %s, error %s" % (dt, e)
+        print(err)
+        err_list.append(err)
         pass
+
+# write missing dates to log file, log created only if list is non-empty
+if err_list:
+    fpath = 'logs/CreateHeader_'+str(mnth)+str(yr)+'.log'
+    f = open(fpath, 'w')
+    err_str = '\n'.join(err_list)
+    f.write(err_str)
+    f.close()
