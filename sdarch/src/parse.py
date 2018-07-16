@@ -1,6 +1,24 @@
 # parsetml cleans up the tftd html from the email and attaches tftd_template headers and footers.
 
 def parsetml(tftd, mth):
+    '''TFTD overhaul 0f Jan 2018 introduced special characters like:\
+        "=E2=80=8B"
+        3D
+        "=09"
+        "=20"
+        "=="
+        "=\r"
+        ^[=]	grep
+        =E2=80=8B	should be 1 more occurance now'''
+    #16-7-2018 Start
+    tftd = tftd.replace('=E2=80=8B','')
+    tftd = tftd.replace('3D','')
+    tftd = tftd.replace('=09','')
+    tftd = tftd.replace('=20','')
+    tftd = tftd.replace('==','')
+    tftd = tftd.replace('=\r','')
+    tftd = tftd.replace('=E2=80=8B','')
+    #16-7-2018 End
     #loc1 = tftd.find('#66CCFF">') #<body style="margin:0px; font-family:Arial, verdana, sans-serif; font-size:10px; text-align:left" bgcolor="#66CCFF">
     loc1 = tftd.find('<table') #updated to not get email headers from gmail fetches.
     loc2 = tftd.find('</body>')

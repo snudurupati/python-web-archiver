@@ -34,14 +34,16 @@ def fetchtml(dtval):
 	indxhdr = dt
 	communhdr = dt
 
-	lines = iter(tftd.split('\n'))
-	for line in lines:
-		if "Today's Thought--" in line:
-			indxhdr = line.split('--')[1].strip()
-		elif "Today's Thought:" in line:
-			indxhdr = line.split(':')[1].strip()
-		elif "Answers by Citing the Vedic Version:" in line:
-			communhdr = [line for line in lines if ':' in line][0].split(':')[1].strip()
+	typ, msg  = m.fetch(items[len(items)-1], '(RFC822.SIZE BODY[HEADER.FIELDS (SUBJECT)])')
+	subj = msg[0][1].strip()
+	subj = subj.replace('--&--','--and--')
+	subj = subj.replace('-&-','--and--')
+	subj = subj.replace('--and', '')
+	subj = subj.replace('\r', '')
+	subj = subj.replace('\n', '')
+	subj = subj.replace('/', '')
+	subj = subj.split('--')
+	indxhdr = subj[1]
 					
 	#print indxhdr, communhdr
 	m.logout()

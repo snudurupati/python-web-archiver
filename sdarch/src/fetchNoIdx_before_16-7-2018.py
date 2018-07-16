@@ -8,10 +8,10 @@ from itertools import dropwhile, islice
 
 def fetchtml(dtval):
 	m = initgmail()
-	dt = dtval.strftime('%#d %B %Y').lstrip('0') #construct date string of fromat '27 November 2012' and remove any leading 0's as on 01 December.
+	dt = dtval.strftime('%-d %B %Y').lstrip('0') #construct date string of fromat '27 November 2012' and remove any leading 0's as on 01 December.
 	#construct a raw search string like '(X-GM-RAW "subject: 1 May 2016 after:2016/4/30 before:2016/5/7")'
-	before = (dtval + timedelta(days=2)).strftime('%Y/%#m/%#d')
-	after = (dtval - timedelta(days=1)).strftime('%Y/%#m/%#d')
+	before = (dtval + timedelta(days=2)).strftime('%Y/%-m/%-d')
+	after = (dtval - timedelta(days=1)).strftime('%Y/%-m/%-d')
 	rawStr = '(X-GM-RAW "subject: '+dt+' after:'+after+' before:'+before+'")'
 	#print rawStr
 	resp, msgID = m.search(None, rawStr)
