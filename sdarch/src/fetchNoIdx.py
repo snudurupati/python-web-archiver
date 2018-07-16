@@ -43,7 +43,7 @@ def fetchtml(dtval):
 	subj = subj.replace('\n', '')
 	subj = subj.replace('/', '')
 	subj = subj.split('--')
-	indxhdr = subj[1]
+	indxhdr = subj[0].split(':')[1]
 					
 	#print indxhdr, communhdr
 	m.logout()

@@ -58,12 +58,13 @@ def replimgsrc(html):
     html = html.replace('<img border="3" src="http://www.backtohome.com/images','<img border="0" src="/picture_library')
     i=1
     while i <len(html):
-	loc1 = html.find('src',i)
+	loc1 = html.find('src=',i)
 	loc2 = html.find(' ', loc1)
 	i = loc2
 	if i == -1:
 		break
 	#print 'src="/picture_library'+html[loc1:loc2].split('/')[-1]
+        #print html[loc1:loc2], len(html)
         html = html.replace(html[loc1:loc2],'src="/picture_library/'+html[loc1:loc2].split('/')[-1])
         #print html
     return html
