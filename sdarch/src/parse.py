@@ -6,20 +6,17 @@ def parsetml(tftd, mth):
     loc2 = tftd.find('</body>')
     html = tftd[loc1:loc2]
 
-    '''TFTD overhaul 0f Jan 2018 introduced special characters like:\
-        "=E2=80=8B"
+    '''TFTD overhaul 0f Jan 2018 introduced special characters like:
+        =\r
         3D
-        "=09"
-        "=20"
-        "=="
-        "=\r"
-        ^[=]	grep
-        =E2=80=8B	should be 1 more occurance now'''
-    #Replace all avove or just regex replace this pattern (=[A-Z0-9][A-Z0-9])
+        ==
+        grep (=[A-Z0-9][A-Z0-9])
+        '''
 
     #8-8-2018 Start
 
     html = html.replace('=\r\n','')
+    #html = html.replace('=\r\n','')
     #html = html.replace('=E2=80=8B','') #this is just redundant after above regex replacer
     html = html.replace('3D','')
     #html = html.replace('=09','')

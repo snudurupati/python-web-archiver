@@ -15,7 +15,6 @@ def fetchtml(dtval):
 	before = (dtval + timedelta(days=2)).strftime('%Y/%-m/%-d')
 	after = (dtval - timedelta(days=1)).strftime('%Y/%-m/%-d')
 	rawStr = '(X-GM-RAW "subject: '+dt+' after:'+after+' before:'+before+'")'
-	#print rawStr
 	resp, msgID = m.search(None, rawStr)
 	'''12/18/2014
 	resp, msgID = m.search(None,'subject', dt)
@@ -47,7 +46,7 @@ def fetchtml(dtval):
 	subj = subj.split('--')
 	indxhdr = subj[0].split(':')[1]
 	indxhdr = re.sub('=\\?utf-8\\?.\\?|(=[A-Z0-9][A-Z0-9])', '', indxhdr).replace('_', ' ')
-	indxhdr = indxhdr.split('?')[0]
+	indxhdr = indxhdr.split('?')[0].replace('Corrected', '')
 	#print indxhdr, communhdr
 	m.logout()
 	return tftd, indxhdr, communhdr
