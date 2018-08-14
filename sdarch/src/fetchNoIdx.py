@@ -7,6 +7,8 @@ from gmail import initgmail
 from itertools import dropwhile, islice
 
 def fetchtml(dtval):
+	import re
+
 	m = initgmail()
 	dt = dtval.strftime('%-d %B %Y').lstrip('0') #construct date string of fromat '27 November 2012' and remove any leading 0's as on 01 December.
 	#construct a raw search string like '(X-GM-RAW "subject: 1 May 2016 after:2016/4/30 before:2016/5/7")'
@@ -44,7 +46,8 @@ def fetchtml(dtval):
 	subj = subj.replace('/', '')
 	subj = subj.split('--')
 	indxhdr = subj[0].split(':')[1]
-					
+	indxhdr = re.sub('=\\?utf-8\\?.\\?|(=[A-Z0-9][A-Z0-9])', '', indxhdr).replace('_', ' ')
+	indxhdr = indxhdr.split('?')[0]
 	#print indxhdr, communhdr
 	m.logout()
 	return tftd, indxhdr, communhdr
