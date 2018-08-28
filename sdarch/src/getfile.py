@@ -30,11 +30,8 @@ def getimg(imgurlist,imgnamlist):
             print(e)
             pass
 
-def getimg_ftp(imgurlist,imgnamlist):
-    import os, ftplib
-    FTPUSER = os.environ.get("FTPUSER", '')
-    FTPPASS = os.environ.get("FTPPASS", '')
-    ftps = ftplib.FTP('www.sda-archives.com', FTPUSER, FTPPASS)
+#overloaded method that does ftp upload after downloading the image from web
+def getimg(imgurlist,imgnamlist, ftps):
     for i in range(len(imgurlist)):
         imgname = 'images/'+imgnamlist[i]
         imgname = imgname.replace('?','')

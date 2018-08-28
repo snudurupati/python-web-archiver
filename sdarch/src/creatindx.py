@@ -1,7 +1,7 @@
 import upload
 
 
-def indxhtml(dtval, indxhdr):
+def indxhtml(dtval, indxhdr, ftps):
 	dd = dtval.strftime('%d')
 	mm = dtval.strftime('%m')
 	month = dtval.strftime('%b')
@@ -26,12 +26,12 @@ def indxhtml(dtval, indxhdr):
 	f2.write(html)
 	f2.close()
 	f2 = open('tftd/index.html','r')
-	upload.upfile(dtval,'index.html',f2)
+	upload.upfile(dtval,'index.html',f2, ftps)
 	f2.close()
 
 
 
-def communhtml(dtval, communhdr):
+def communhtml(dtval, communhdr, ftps):
 	dd = dtval.strftime('%d')
 	mm = dtval.strftime('%m')
 	month = dtval.strftime('%b')
@@ -57,5 +57,5 @@ def communhtml(dtval, communhdr):
 	f2.write(html)
 	f2.close()
 	f2 = open('tftd/commun.html','r')
-	upload.upfile(dtval,'commun.html',f2)
+	upload.upfile(dtval,'commun.html',f2, ftps)
 	f2.close()
