@@ -30,6 +30,25 @@ def getimg(imgurlist,imgnamlist):
             print(e)
             pass
 
+def getimg_ftp(imgurlist,imgnamlist):
+    import os, ftplib
+    FTPUSER = os.environ.get("FTPUSER", '')
+    FTPPASS = os.environ.get("FTPPASS", '')
+    ftps = ftplib.FTP('www.sda-archives.com', FTPUSER, FTPPASS)
+    for i in range(len(imgurlist)):
+        imgname = 'images/'+imgnamlist[i]
+        imgname = imgname.replace('?','')
+        try:
+            urllib.urlretrieve(imgurlist[i], imgname)
+            fob = open(imgname,'rb')
+            #print(imgurlist[i])
+            #print(imgname)
+            upload.upimg(imgnamlist[i],fob, ftps) #replace any %20 with white space.
+            fob.close()
+        except Exception as e:
+            print(e)
+            pass
+
 
 
 

@@ -1,10 +1,9 @@
-import ftplib
-import datetime
+import ftplib, os
 
 def upfile(dtval,fname, fob):
-	
-	#ftps = ftplib.FTP_TLS('www.sda-archives.com','gaurahari','Bhagavan108') #FTP_TLS stopped working on 2/9/2013
-	ftps = ftplib.FTP('www.sdaarchives.com','gaurahari','Bhagavan108')
+	FTPUSER = os.environ.get("FTPUSER", '')
+	FTPPASS = os.environ.get("FTPPASS", '')
+	ftps = ftplib.FTP('www.sda-archives.com', FTPUSER, FTPPASS)
 	#ftps.prot_p()
 	mth = dtval.strftime('%b').lower()
 	year = dtval.strftime('%Y')
@@ -14,12 +13,10 @@ def upfile(dtval,fname, fob):
 	ftps.quit()
 
 	
-def upimg(imgname, fob):
-    #ftps = ftplib.FTP_TLS('www.sda-archives.com','gaurahari','Bhagavan108')
-    ftps = ftplib.FTP('www.sdaarchives.com','gaurahari','Bhagavan108')
-    #ftps.prot_p()
-    path = '/picture_library'
-    ftps.cwd(path)
-    ftps.storbinary('STOR '+imgname, fob)
-    ftps.quit()
+
+def upimg(imgname, fob, ftps):
+	path = '/picture_library'
+	ftps.cwd(path)
+	ftps.storbinary('STOR '+imgname, fob)
+	ftps.quit()
 

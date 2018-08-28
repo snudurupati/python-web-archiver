@@ -37,7 +37,7 @@ def parsetml(tftd, mth):
     html = html.replace('Change Subscriber Options', '')
 
     hdr = """<html xmlns:v="urn:schemas-microsoft-com:vml">"""
-    fotr = "<p align=center><a href='../../../index.html'>Back to Home Page</a></p><p align=center><a href='index.html'>Back to "+mth+" Index</a></p></body></html>"
+    fotr = "<p align=center><a href='../../index.html'>Back to Home Page</a></p><p align=center><a href='index.html'>Back to "+mth+" Index</a></p></body></html>"
     html = hdr+html+fotr
 
     return html
