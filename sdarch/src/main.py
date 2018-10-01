@@ -33,6 +33,7 @@ upload.upfile(dtval,fname,f,ftps)
 indxhtml(dtval, indxhdr, ftps)
 communhtml(dtval, communhdr, ftps)
 f.close()
+ftps.quit()
 
 
 

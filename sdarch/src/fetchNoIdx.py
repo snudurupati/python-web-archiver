@@ -46,7 +46,9 @@ def fetchtml(dtval):
 	subj = subj.split('--')
 	indxhdr = subj[0].split(':')[1]
 	indxhdr = re.sub('=\\?utf-8\\?.\\?|(=[A-Z0-9][A-Z0-9])', '', indxhdr).replace('_', ' ')
+	indxhdr = indxhdr.split('--')[0]
 	indxhdr = indxhdr.split('?')[0].replace('Corrected', '')
+	indxhdr = indxhdr.replace('-', '')
 	#print indxhdr, communhdr
 	m.logout()
 	return tftd, indxhdr, communhdr
